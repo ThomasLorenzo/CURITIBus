@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURITIBus</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div id="logo">
+                <i id="logo-icon" class="fas fa-bus"></i>
+                <div>
+                    <h1 id="logo-text">CURITIBus</h1>
+                    <h2 id="logo-subtext">Explorador do Transporte Público de Curitiba</h2>
+                </div>
+            </div>
+            <div id="stats">
+                <div id="lines-stat" class="stat">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Linhas</div>
+                </div>
+                <!-- <div class="stat">
+                    <div class="stat-value">352</div>
+                    <div class="stat-label">Paradas</div>
+                </div> -->
+            </div>
+        </div>
+    </header>
+    <main id="main">
+        <div class="container">
+            <div id="controls">
+                <div id="search">
+                    <i id="search-icon" class="fas fa-search"></i>
+                    <input id="search-input" type="text" placeholder="Buscar linha, parada ou destino...">
+                    <button id="search-clear">
+                        <i id="search-clear-icon" class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="filters">
+                    <button class="filter" data-type="expresso">EXPRESSO</button>
+                    <button class="filter" data-type="alimentador">ALIMENTADOR</button>
+                    <button class="filter" data-type="convencional">CONVENCIONAL</button>
+                    <button class="filter" data-type="interbairros">INTERBAIRROS</button>
+                    <button class="filter" data-type="ligeirinho">LIGEIRINHO</button>
+                    <button class="filter" data-type="ligeirao">LIGEIRÃO</button>
+                    <button class="filter" data-type="turismo">TURISMO</button>
+                    <button class="filter" data-type="madrugueiro">MADRUGUEIRO</button>
+                </div>
+            </div>
+            <div id="loading">
+                <div class="spinner"></div>
+                <span>Carregando dados...</span>
+            </div>
+            <div id="error" style="display: none;">
+                <i id="error-icon" class="fas fa-exclamation-triangle"></i>
+                <h3 id="error-message">Erro as carregar os dados</h3>
+                <h4 id="error-retry">Tentar novamente</h4>
+            </div>
+            <div id="results" style="display: none;">
+                <div id="results-header">
+                    <h2>Linhas</h2>
+                    <span id="results-count">0 linhas encontradas</span>
+                </div>
+                <div id="lines"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
