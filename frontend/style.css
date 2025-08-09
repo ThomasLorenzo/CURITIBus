@@ -3,9 +3,11 @@
     --primary-hover: #2563eb;
     --secondary: #64748b;
     --error: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
     --background: #ffffff;
     --surface: #f8fafc;
-    --surface-hover: #f1f5f9;
+    --surface-hover: #f0f5f9;
     --border: #e2e8f0;
     --text-primary: #0f172a;
     --text-secondary: #64748b;
@@ -28,10 +30,18 @@
     outline-offset: 2px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--surface);
     color: var(--text-primary);
+}
+
+ul {
+    list-style: none;
 }
 
 .container {
@@ -46,8 +56,8 @@ body {
     background-color: rgba(256, 256, 256, 0.9);
     border-bottom: 1px solid var(--border);
     padding: 16px 0;
-    z-index: 1;
     backdrop-filter: blur(8px);
+    z-index: 30;
 }
 
 #header .container {
@@ -207,12 +217,13 @@ body {
     background-color: var(--primary-hover);
 }
 
-#loading {
+.loading {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 16px;
-    padding: 48px;
+    padding: 24px;
     color: var(--text-secondary);
 }
 
@@ -231,28 +242,29 @@ body {
     }
 }
 
-#error {
+.error {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 356px;
+    justify-content: center;
     margin: 0 auto;
+    padding: 24px;
 }
 
-#error-icon {
+.error-icon {
     font-size: 48px;
     color: var(--error);
     margin-bottom: 16px;
 }
 
-#error-message {
+.error-message {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 4px;
     color: var(--text-primary);
 }
 
-#error-retry {
+.error-retry {
     font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
@@ -260,7 +272,7 @@ body {
     transition: var(--transition);
 }
 
-#error-retry:hover {
+.error-retry:hover {
     filter: brightness(0.75);
 }
 
@@ -393,4 +405,208 @@ body {
 .button-secondary:hover {
     background-color: var(--surface-hover);
     color: var(--text-primary);
+}
+
+/* #modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+#overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#content {
+    position: relative;
+    background-color: var(--background);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 24px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 80vh;
+    overflow: hidden;
+} */
+
+#map-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-lg);
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+    border-radius: var(--radius-lg);
+    position: relative;
+    z-index: 1;
+}
+
+#map-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+}
+
+#map-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+}
+
+#directions-container {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 20;
+    background-color: var(--background);
+    padding: 8px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+#directions-container select {
+    width: 100%;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 8px;
+    padding: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.stop-marker {
+    min-width: 24px;
+    height: 24px;
+    background-color: var(--primary);
+    border: 2px solid var(--border);
+    color: white;
+    z-index: 1;
+}
+
+.vehicle-marker {
+    position: relative;
+    min-width: 36px;
+    height: 36px;
+    border: 2px solid var(--border);
+    background-color: white;
+    color: var(--primary);
+    z-index: 2;
+}
+
+.user-marker {
+    min-width: 36px;
+    height: 36px;
+    border: 2px solid var(--border);
+    background-color: white;
+    color: var(--primary);
+    z-index: 3;
+}
+
+.vehicle-marker .status-indicator {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: -3px;
+    right: -3px;
+    border: 2px solid white;
+    z-index: 3;
+}
+
+.vehicle-marker .status-indicator[data-status="no-horário"] {
+    background-color: var(--success);
+}
+
+.vehicle-marker .status-indicator[data-status="atrasado"] {
+    background-color: var(--error);
+}
+
+.vehicle-marker .status-indicator[data-status="adiantado"] {
+    background-color: var(--warning);
+}
+
+.marker-popup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.marker-title {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.marker-icon {
+    font-size: 12px;
+}
+
+.vehicle-marker .marker-icon {
+    font-size: 18px;
+}
+
+.user-marker .marker-icon {
+    font-size: 18px;
+}
+
+.marker-popup-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.marker-popup-title-icon {
+    color: var(--primary);
+    margin-right: 4px;
+}
+
+.marker-popup-footer {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+#map .mapboxgl-popup-content {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    padding: 16px;
+}
+
+#map .mapboxgl-popup {
+    z-index: 4;
 }

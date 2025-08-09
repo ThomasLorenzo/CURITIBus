@@ -33,18 +33,58 @@ app.get('/api/lines', async (req, res) => {
     }
 });
 
-// app.get('/api/stops', async (req, res) => {
-//     try {
-//         const url = 'https://transporteservico.urbs.curitiba.pr.gov.br/getPontosLinha.php?c=' + apiCode + '&linha=' + req.query.linha;
-//         const response = await fetch(url);
-//         const data = await response.json();
+app.get('/api/stops', async (req, res) => {
+    try {
+        const url = 'https://transporteservico.urbs.curitiba.pr.gov.br/getPontosLinha.php?c=' + apiCode + '&linha=' + req.query.line;
+        const response = await fetch(url);
+        const data = await response.json();
 
-//         res.json(data);
-//     } catch (error) {
-//         console.error('Error fetching stops data', error);
-//         res.status(500).json({ error: 'Error fetching stops data' });
-//     }
-// });
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching stops data', error);
+        res.status(500).json({ error: 'Error fetching stops data' });
+    }
+});
+
+app.get('/api/shapes', async (req, res) => {
+    try {
+        const url = 'https://transporteservico.urbs.curitiba.pr.gov.br/getShapeLinha.php?c=' + apiCode + '&linha=' + req.query.line;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching shapes data', error);
+        res.status(500).json({ error: 'Error fetching shapes data' });
+    }
+});
+
+app.get('/api/shape', async (req, res) => {
+    try {
+        const url = 'https://transporteservico.urbs.curitiba.pr.gov.br/getShapeName.php?c=' + apiCode + '&shp=' + req.query.shape;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching shape data', error);
+        res.status(500).json({ error: 'Error fetching shape data' });
+    }
+});
+
+app.get('/api/vehicles', async (req, res) => {
+    try {
+        const lineFilter = req.query.line ? '&linha=' + req.query.line : '';
+        const url = 'https://transporteservico.urbs.curitiba.pr.gov.br/getVeiculos.php?c=' + apiCode + lineFilter;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching vehicles data', error);
+        res.status(500).json({ error: 'Error fetching vehicles data' });
+    }
+});
 
 app.listen(port, () => {
   console.log('Server running on port ' + port);

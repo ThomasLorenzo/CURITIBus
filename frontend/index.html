@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.13.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.13.0/mapbox-gl.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js" defer></script>
 </head>
@@ -25,19 +27,35 @@
                     <div class="stat-value">0</div>
                     <div class="stat-label">Linhas</div>
                 </div>
-                <!-- <div class="stat">
-                    <div class="stat-value">352</div>
-                    <div class="stat-label">Paradas</div>
-                </div> -->
+                <div id="vehicles-stat" class="stat">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Veículos</div>
+                </div>
             </div>
         </div>
     </header>
     <main id="main">
         <div class="container">
+            <div id="map-container">
+                <div id="map-loading" class="loading">
+                    <div class="spinner"></div>
+                    <span>Carregando mapa...</span>
+                </div>
+
+                <div id="map-error" class="error" style="display: none;">
+                    <i class="error-icon fas fa-exclamation-triangle"></i>
+                    <h3 class="error-message">Erro ao carregar o mapa</h3>
+                    <h4 class="error-retry">Tentar novamente</h4>
+                </div>
+
+                <div id="directions-container" style="display: none;"></div>
+                
+                <div id="map"></div>
+            </div>
             <div id="controls">
                 <div id="search">
                     <i id="search-icon" class="fas fa-search"></i>
-                    <input id="search-input" type="text" placeholder="Buscar linha, parada ou destino...">
+                    <input id="search-input" type="text" placeholder="Buscar linha por nome ou número...">
                     <button id="search-clear">
                         <i id="search-clear-icon" class="fas fa-times"></i>
                     </button>
@@ -53,14 +71,14 @@
                     <button class="filter" data-type="madrugueiro">MADRUGUEIRO</button>
                 </div>
             </div>
-            <div id="loading">
+            <div id="lines-loading" class="loading">
                 <div class="spinner"></div>
-                <span>Carregando dados...</span>
+                <span>Carregando linhas...</span>
             </div>
-            <div id="error" style="display: none;">
-                <i id="error-icon" class="fas fa-exclamation-triangle"></i>
-                <h3 id="error-message">Erro as carregar os dados</h3>
-                <h4 id="error-retry">Tentar novamente</h4>
+            <div id="lines-error" class="error" style="display: none;">
+                <i class="error-icon fas fa-exclamation-triangle"></i>
+                <h3 class="error-message">Erro as carregar as linhas</h3>
+                <h4 class="error-retry">Tentar novamente</h4>
             </div>
             <div id="results" style="display: none;">
                 <div id="results-header">
@@ -71,5 +89,19 @@
             </div>
         </div>
     </main>
+    <!-- <div id="modal">
+        <div id="overlay"></div>
+        <div id="content">
+            <div id="modal-header">
+                <h3 id="modal-title">Título</h3>
+                <button id="modal-close">
+                    <i class="modal-close-icon fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modal-body">
+                Teste
+            </div>
+        </div>
+    </div> -->
 </body>
 </html>
