@@ -1,3 +1,8 @@
+I had to stop the project because the API is no longer working. I believe they changed the link or something like that, and I need to get the new access...
+
+# WIP
+<img width="1919" height="867" alt="Screenshot_1" src="https://github.com/user-attachments/assets/3e65a970-e4ae-49a2-b8d8-1eaefc3aeaaf" />
+
 # CURITIBus 
 A web application to explore Curitiba's public transportation system using URBS API data.
 
